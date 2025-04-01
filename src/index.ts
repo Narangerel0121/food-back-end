@@ -47,6 +47,11 @@ app.get('/foods', async (req, res) => {
     res.json({ success: true, foods })
 })
 
+app.get('/foods/:id', async (req, res) => {
+    console.log({headers: req.headers, params: req.params})
+    res.json({ success: true })
+})
+
 app.post('/food', async (req, res) => {
     const food = await Food.create(req.body);
     // console.log(req.body);
@@ -56,19 +61,21 @@ app.post('/food', async (req, res) => {
 // app.delete('/food/:id', async (req, res) => {
 //     const {id} = req.params;
 //     res.json("Amjillttai ustgagdlaa")
-// })
+// });
 
 app.put('/food/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const food = Food.findByIdAndUpdate(id, req.body);
         if (!food) {
-            return res.status(404).json({ message: "Food is not found" })
+            res.status(404).json({ message: "Food is not found" })
+            return
         }
     } catch (error) {
-        return res.status(404).json({ message: error.message })
+        res.status(404).json({ message: error.message })
+        return
     }
-})
+});
 
 app.listen(port, async () => {
     const connectDb = async () => {
@@ -83,11 +90,11 @@ app.listen(port, async () => {
         }
     }
     connectDb()
-})
+});
 
 app.get('/food', (_req: Request, res: Response) => {
     res.json({ success: true });
-})
+});
 
 // app.listen(port, () => {
 //     console.log(`Server is running on port ${port}`);
