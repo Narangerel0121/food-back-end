@@ -5,7 +5,7 @@ export const createFood = async (req, res) => {
     res.json({success: true, food: createdFood});
 }
 
-export const getFoods = async (req, res) => {
+export const getFoods = async (_req, res) => {
     const foods = await Food.find().populate('category');
 
     res.json({message: true, foods})

@@ -4,11 +4,11 @@ import { foodRouter } from "./routes/food";
 import { connection } from "./utils/connection";
 import { categoryRouter } from "./routes/category";
 import dotenv from "dotenv";
+import { Category } from "./schema/Category";
 
 dotenv.config();
 const app = express();
 const PORT = 8000;
-
 app.use(express.json());
 
 // const users = [
@@ -95,17 +95,21 @@ app.use(express.json());
 
 app.use('/api/v1/foods', foodRouter);
 // app.use('/api/v2/food', foodRouter);
-
-app.use('/api/v1/category', categoryRouter);
+app.use('/api/v1/categories', categoryRouter);
 
 app.get('/', (_req: Request, res: Response) => {
-    res.json({ message: "Hello from Nakanim" }) // json uyed
+    res.json({ message: "Hello from Nakanim" }); // json uyed
 })
 
-app.get('/foods', async(_req: Request, res: Response) => {
-    const foods = await Food.find()
-    res.json({message: "amjilttai avlaa", foods})
+app.get('/api/v1/foods', async(_req: Request, res: Response) => {
+    const foods = await Food.find();
+    res.json({message: "Got foods successfully", foods})
 });
+
+app.get('/api/v1/categories', async(req: Request, res: Response) => {
+    const categories = await Category.find();
+    res.json({message: "Got all categories successfully", categories})
+})
 
 // app.delete('/foods/:id', async(req, res) => {
 //     try {
