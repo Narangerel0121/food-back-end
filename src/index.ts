@@ -93,7 +93,7 @@ app.use(express.json());
 //     res.json({ message: "amjilttai nemegdlee", moreUsers })
 // })
 
-app.use('/api/v1/food', foodRouter);
+app.use('/api/v1/foods', foodRouter);
 // app.use('/api/v2/food', foodRouter);
 
 app.use('/api/v1/category', categoryRouter);
@@ -105,7 +105,36 @@ app.get('/', (_req: Request, res: Response) => {
 app.get('/foods', async(_req: Request, res: Response) => {
     const foods = await Food.find()
     res.json({message: "amjilttai avlaa", foods})
-})
+});
+
+// app.delete('/foods/:id', async(req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const food = await Food.findByIdAndDelete(id);
+//         if(!food) {
+//             res.status(404).json({message: "Food not found"})
+//         }
+//         res.status(200).json({message: "Food deleted successfully", food})
+//     } catch (error) {
+//         res.status(500).json({message: error.message})
+//     }
+
+//     res.json({message: "amjilttai ustgagdlaa"});
+// });
+
+// app.put('/api/v1/foods/:id', async(req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const food = await Food.findByIdAndUpdate(id, req.body);
+//         if(!food) {
+//             res.status(404).json({message: "Food not found"});
+//         }
+//         const updatedFood = await Food.findById(id);
+//         res.status(200).json({message: "Food updated successfully", updatedFood: updatedFood});
+//     } catch (error) {
+//         res.status(500).json({message: error.message})
+//     }
+// })
 
 app.listen(PORT, async () => {
     await connection()
