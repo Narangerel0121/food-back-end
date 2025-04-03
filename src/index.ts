@@ -5,6 +5,8 @@ import { connection } from "./utils/connection";
 import { categoryRouter } from "./routes/category";
 import dotenv from "dotenv";
 import { Category } from "./schema/Category";
+import { orderRouter } from "./routes/order";
+import { userRouter } from "./routes/user";
 
 dotenv.config();
 const app = express();
@@ -96,6 +98,8 @@ app.use(express.json());
 app.use('/api/v1/foods', foodRouter);
 // app.use('/api/v2/food', foodRouter);
 app.use('/api/v1/categories', categoryRouter);
+app.use('/api/v1/orders', orderRouter);
+app.use('/api/v1/users', userRouter)
 
 app.get('/', (_req: Request, res: Response) => {
     res.json({ message: "Hello from Nakanim" }); // json uyed
