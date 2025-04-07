@@ -1,12 +1,9 @@
 import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema({
-    _id: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "user"
-    },
     email: {
         type: String,
         required: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -15,6 +12,7 @@ const UserSchema = new mongoose.Schema({
     phoneNumber: {
         type: Number,
         required: true,
+        unique: true,
     },
     address: {
         type: String,
@@ -22,16 +20,16 @@ const UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["User", "Admin"]
+        enum: ["USER", "ADMIN"]
     },
-    orderedFoods: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "orderedFood",
-    },
-    isVerified: {
-        type: Boolean,
-        required: true
-    }
+    // orderedFoods: {
+    //     type: mongoose.SchemaTypes.ObjectId,
+    //     ref: "orderedFood",
+    // },
+    // isVerified: {
+    //     type: Boolean,
+    //     required: true
+    // }
 },
     {
         timestamps: true,
