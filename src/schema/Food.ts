@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
 const FoodSchema = new mongoose.Schema({
-    _id: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "food",
-    },
     foodName: {
         type: String,
         required: true,
@@ -14,10 +10,10 @@ const FoodSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true,
+        required: false,
     },
     ingredients: {
-        type: String,
+        type: [],
         required: true,
     },
     category: {
