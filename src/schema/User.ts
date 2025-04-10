@@ -9,10 +9,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // role: {
-    //     type: String,
-    //     enum: ["USER", "ADMIN"]
-    // },
+    role: {
+        type: String,
+        enum: ["USER", "ADMIN"],
+        default: "USER"
+    },
     // orderedFoods: {
     //     type: mongoose.SchemaTypes.ObjectId,
     //     ref: "orderedFood",
