@@ -1,5 +1,6 @@
-import { User } from "../schema/User"
-import bcrypt from "bcrypt"
+import { User } from "../schema/User";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const SALT_ROUND = 12;
 
@@ -33,5 +34,8 @@ export const login = async (req, res) => {
     if (!isCompare) {
         res.status(401).json({ success: false, error: "User or password is wrong" })
     }
-    res.status(200).json({ success: true, user })
+
+    const token = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: '1h' });
+    console.log(token);
+    res.status(200).json({ success: true, token })
 }

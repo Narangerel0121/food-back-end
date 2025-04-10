@@ -1,8 +1,16 @@
 import { Category } from "../schema/Category";
+import jwt from "jsonwebtoken";
 
 export const createCategory = async (req, res) => {
+   try {
+    
+
     const createdCategory = await Category.create(req.body);
     res.json({ success: true, category: createdCategory });
+
+   } catch(error) {
+    res.status(200).json({success: false, msg: error.message})
+   }
 }
 
 export const getCategory = async (_req, res) => {
