@@ -8,11 +8,13 @@ import { Category } from "./schema/Category";
 import { orderRouter } from "./routes/order";
 import { userRouter } from "./routes/user";
 import { authRouter } from "./routes/auth";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
 const PORT = 8000;
 app.use(express.json());
+app.use(cors())
 
 // const users = [
 //     {
@@ -95,13 +97,13 @@ app.use(express.json());
 //     const moreUsers = [...users, newUser]
 //     res.json({ message: "amjilttai nemegdlee", moreUsers })
 // })
-
 app.use('/api/v1/foods', foodRouter);
 // app.use('/api/v2/food', foodRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/auth',authRouter);
 app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/users', userRouter);
+
 
 app.get('/', (_req: Request, res: Response) => {
     res.json({ message: "Hello from Nakanim" }); // json uyed

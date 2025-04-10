@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 const SALT_ROUND = 12;
 
 export const register = async (req, res) => {
+    console.log("register-----")
     try {
         const { email, password } = req.body;
         const salt = bcrypt.genSaltSync(SALT_ROUND);
@@ -14,10 +15,15 @@ export const register = async (req, res) => {
         const user = await User.create({ ...req.body, password: hash });
 
         res.json({ success: true, user });
+
     } catch (error) {
+        console.log({error})
         if (error.code === 11000) {
             res.status(400).json({ success: false, error: "Email exist" });
             return;
+        }
+        else {
+            console.log( error)
         }
     }
 }
