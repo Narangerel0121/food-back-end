@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 const SALT_ROUND = 12;
 
 export const register = async (req, res) => {
-    console.log("register-----")
+    // console.log("register-----")
     try {
         const { email, password } = req.body;
         const salt = bcrypt.genSaltSync(SALT_ROUND);
@@ -42,6 +42,6 @@ export const login = async (req, res) => {
     }
 
     const token = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: '1h' });
-    console.log(token);
+    console.log(token, "this is token");
     res.status(200).json({ success: true, token })
 }
