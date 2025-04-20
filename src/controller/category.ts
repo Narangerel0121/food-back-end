@@ -3,8 +3,6 @@ import jwt from "jsonwebtoken";
 
 export const createCategory = async (req, res) => {
    try {
-    
-
     const createdCategory = await Category.create(req.body);
     res.json({ success: true, category: createdCategory });
 
